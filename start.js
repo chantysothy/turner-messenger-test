@@ -74,6 +74,18 @@ function handleChangeEvent(changeEvent, callback) {
     console.log('change event');
     console.log(JSON.stringify(changeEvent));
 
+    const field = _.get(changeEvent, 'field');
+    const item = _.get(changeEvent, 'value.item');
+    const verb = _.get(changeEvent, 'value.verb');
+    const message = _.get(changeEvent, 'value.message', '').toLowerCase();
+    const userId = _.get(changeEvent, 'value.sender_id');
+    const commentId = _.get(changeEvent, 'value.comment_id');
+
+    if (field === 'feed' && item === 'comment' && verb === 'add' && userId && commentId && message.indexOf('#instabuy') !== -1) {
+
+        callPrivateReplyAPI(commentId, `Hello user ${userId}`);
+    }
+
     callback();
 }
 
@@ -165,13 +177,14 @@ function tryToBuy(userId) {
  *
  */
 function callSendAPI(messageData) {
+
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: PAGE_TOKEN },
         method: 'POST',
         json: messageData
 
-    }, function (error, response, body) {
+    }, (error, response, body) => {
         if (!error && response.statusCode === 200) {
             const recipientId = body.recipient_id;
             const messageId = body.message_id;
@@ -187,6 +200,30 @@ function callSendAPI(messageData) {
             console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
         }
     });
+}
+
+function callPrivateReplyAPI(commentId, message) {
+
+    request({
+        uri: `https://graph.facebook.com/v2.8/${commentId}/private_replies`,
+        qs: { access_token: PAGE_TOKEN },
+        method: 'POST',
+        json: {
+            message
+        }
+    }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+
+            const messageId = body.id;
+
+            if (messageId) {
+                console.log("Successfully sent private reply with id %s", messageId);
+            }
+        } else {
+            console.error("Failed calling Private Reply API", response.statusCode, response.statusMessage, body.error);
+        }
+    });
+
 }
 
 /*
