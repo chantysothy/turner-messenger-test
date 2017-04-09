@@ -83,9 +83,11 @@ function handleMessagingEvent(messagingEvent, callback) {
     console.log(JSON.stringify(messagingEvent));
 
     const ref = _.get(messagingEvent, 'referral.ref');
+    const message = _.get(messagingEvent, 'message.text', '').toLowerCase();
     const userId = _.get(messagingEvent, 'sender.id');
 
-    if (ref === 'instabuy' && userId) {
+
+    if ((ref === 'instabuy' || message.indexOf('instabuy') !== -1) && userId) {
         tryToBuy(userId);
     }
 
