@@ -36,20 +36,22 @@ app.post('/webhook', function (req, res) {
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
-        // Iterate over each entry - there may be multiple if batched
-        data.entry.forEach(function(entry) {
-            const pageID = entry.id;
-            const timeOfEvent = entry.time;
+        console.log(JSON.stringify(data));
 
-            // Iterate over each messaging event
-            entry.messaging.forEach(function(event) {
-                if (event.message) {
-                    receivedMessage(event);
-                } else {
-                    console.log("Webhook received unknown event: ", event);
-                }
-            });
-        });
+        // Iterate over each entry - there may be multiple if batched
+        // data.entry.forEach(function(entry) {
+        //     const pageID = entry.id;
+        //     const timeOfEvent = entry.time;
+        //
+        //     // Iterate over each messaging event
+        //     entry.messaging.forEach(function(event) {
+        //         if (event.message) {
+        //             receivedMessage(event);
+        //         } else {
+        //             console.log("Webhook received unknown event: ", event);
+        //         }
+        //     });
+        // });
 
         // Assume all went well.
         //
