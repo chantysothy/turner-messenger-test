@@ -83,7 +83,7 @@ function handleChangeEvent(changeEvent, callback) {
 
     if (field === 'feed' && item === 'comment' && verb === 'add' && userId && commentId && message.indexOf('#instabuy') !== -1) {
 
-        callPrivateReplyAPI(commentId, `Hello user ${userId}`);
+        callReplyAPI(commentId, `Hello user ${userId}`);
     }
 
     callback();
@@ -94,7 +94,7 @@ function handleMessagingEvent(messagingEvent, callback) {
     console.log('messaging event');
     console.log(JSON.stringify(messagingEvent));
 
-    const ref = _.get(messagingEvent, 'referral.ref');
+    const ref = _.get(messagingEvent, 'referral.ref', _.get(messagingEvent, 'postback.referral.ref'));
     const message = _.get(messagingEvent, 'message.text', '').toLowerCase();
     const userId = _.get(messagingEvent, 'sender.id');
 
@@ -202,6 +202,29 @@ function callSendAPI(messageData) {
     });
 }
 
+function callReplyAPI(commentId, message) {
+
+    request({
+        uri: `https://graph.facebook.com/v2.8/${commentId}/comments`,
+        qs: { access_token: PAGE_TOKEN },
+        method: 'POST',
+        json: {
+            message
+        }
+    }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+
+            const messageId = body.id;
+
+            if (messageId) {
+                console.log("Successfully sent private reply with id %s", messageId);
+            }
+        } else {
+            console.error("Failed calling Private Reply API", response.statusCode, response.statusMessage, body.error);
+        }
+    });
+}
+
 function callPrivateReplyAPI(commentId, message) {
 
     request({
@@ -223,7 +246,6 @@ function callPrivateReplyAPI(commentId, message) {
             console.error("Failed calling Private Reply API", response.statusCode, response.statusMessage, body.error);
         }
     });
-
 }
 
 /*
