@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaunpersad/turner-messenger-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaunpersad/turner-messenger-test/issues"
+  },
+  "homepage": "https://github.com/shaunpersad/turner-messenger-test#readme",
+  "dependencies": {
+    "async": "^2.3.0",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4"
+  }
+}
