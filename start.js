@@ -74,17 +74,6 @@ function handleChangeEvent(changeEvent, callback) {
     console.log('change event');
     console.log(JSON.stringify(changeEvent));
 
-    if (changeEvent.field !== 'feed' || !_.isPlainObject(changeEvent.value)) {
-        return callback();
-    }
-    if (changeEvent.value.item === 'comment' && changeEvent.value.verb === 'add') {
-
-        tryToBuy(changeEvent.value.sender_id, 'comment');
-
-    } else if (changeEvent.value.item === 'like' && changeEvent.value.verb === 'add') {
-
-        tryToBuy(changeEvent.value.sender_id, 'like');
-    }
     callback();
 }
 
@@ -92,12 +81,18 @@ function handleMessagingEvent(messagingEvent, callback) {
 
     console.log('messaging event');
     console.log(JSON.stringify(messagingEvent));
+
+    const ref = _.get(messagingEvent, 'referral.ref');
+    const userId = _.get(messagingEvent, 'sender.id');
+
+    if (ref === 'instabuy' && userId) {
+        tryToBuy(userId);
+    }
+
     callback();
 }
 
-function tryToBuy(userId, triggerType) {
-
-    console.log('buy triggered by', triggerType);
+function tryToBuy(userId) {
 
     console.log('sending to', userId);
 
