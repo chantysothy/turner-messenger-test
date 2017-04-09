@@ -20,6 +20,7 @@
   "homepage": "https://github.com/shaunpersad/turner-messenger-test#readme",
   "dependencies": {
     "async": "^2.3.0",
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "lodash": "^4.17.4"
   },
