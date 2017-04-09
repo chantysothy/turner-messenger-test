@@ -110,13 +110,13 @@ function tryToBuy(userId) {
                             "title":"#instabuy",
                             "image_url":"https://www.mysnuggiestore.com/content/images/thumbs/0001326_snuggie-blue.jpeg",
                             "subtitle":"#instabuy this snuggie",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": "https://www.mysnuggiestore.com/snuggie-up-blue-2",
-                                "messenger_extensions": true,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": "https://www.mysnuggiestore.com/snuggies"
-                            },
+                            // "default_action": {
+                            //     "type": "web_url",
+                            //     "url": "https://www.mysnuggiestore.com/snuggie-up-blue-2",
+                            //     "messenger_extensions": true,
+                            //     "webview_height_ratio": "tall",
+                            //     "fallback_url": "https://www.mysnuggiestore.com/snuggies"
+                            // },
                             "buttons":[
                                 {
                                     "type":"payment",
