@@ -71,6 +71,9 @@ app.post('/webhook', function (req, res) {
 
 function handleChangeEvent(changeEvent, callback) {
 
+    console.log('change event');
+    console.log(JSON.stringify(changeEvent));
+
     if (changeEvent.field !== 'feed' || !_.isPlainObject(changeEvent.value)) {
         return callback();
     }
@@ -95,6 +98,8 @@ function handleMessagingEvent(messagingEvent, callback) {
 function tryToBuy(userId, triggerType) {
 
     console.log('buy triggered by', triggerType);
+
+    console.log('sending to', userId);
 
     const messageData = {
         "recipient":{
