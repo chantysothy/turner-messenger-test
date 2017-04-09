@@ -12,8 +12,8 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 
 const PORT = process.env.PORT || 3000;
-const VERIFY_TOKEN = 'EmbnhP2tMuG1UQDscaX0GrXXzbebec3PVoxJljXWfIaFU5FNI1';
-const PAGE_TOKEN = 'EAADcZBBJyxP0BAKwrxisgMvewalZBNc2atXnE9cKNziPYQObyTPfRy56U6TXD0ZCiSGKmMkj2c9drQlvlC7biu1ZCzoVoXbqZBfmPO9WXBR9ZC10Qy9b29jaB56eTOfAoW6knhfMJZCRXUtlxI6mENLSSZCZB2zajhoO4mMZCLAQ4NIgZDZD';
+const VERIFY_TOKEN = 'h734WXHeLCXIiQhInrRepT8WXesxtJRfCOjnh6ifofbZSVgwaB';
+const PAGE_TOKEN = 'EAADcZBBJyxP0BADEfGSaQh9jJP6rHKhoCmgQktsWs1Q2HLyg5w8A00ElsDERWe4DEIEWzXQXXDa8u7zi0IFbjrMxBYq9GRuxuIw2mju7V02n30hmsINErUqu0LO25yVn0ljZAYkwH3u2N5zdSusbs0OCYWlhCKrmFN3p2XUwZDZD';
 const APP_SECRET = 'f1fe035a41452301b87acaf667d14478';
 
 app.get('/', function(req, res) {
