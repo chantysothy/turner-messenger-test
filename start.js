@@ -94,12 +94,12 @@ function handleMessagingEvent(messagingEvent, callback) {
     console.log('messaging event');
     console.log(JSON.stringify(messagingEvent));
 
-    const ref = _.get(messagingEvent, 'referral.ref', _.get(messagingEvent, 'postback.referral.ref'));
+    const ref = _.get(messagingEvent, 'referral.ref', _.get(messagingEvent, 'postback.referral.ref', '')).toLowerCase();
     const message = _.get(messagingEvent, 'message.text', '').toLowerCase();
     const userId = _.get(messagingEvent, 'sender.id');
 
 
-    if ((ref === 'instabuy' || message.indexOf('#instabuy') !== -1) && userId) {
+    if ((ref.indexOf('instabuy') !== -1 || message.indexOf('instabuy') !== -1) && userId) {
         tryToBuy(userId);
     }
 
