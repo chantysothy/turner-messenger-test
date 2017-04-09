@@ -87,7 +87,7 @@ function handleMessagingEvent(messagingEvent, callback) {
     const userId = _.get(messagingEvent, 'sender.id');
 
 
-    if ((ref === 'instabuy' || message.indexOf('instabuy') !== -1) && userId) {
+    if ((ref === 'instabuy' || message.indexOf('#instabuy') !== -1) && userId) {
         tryToBuy(userId);
     }
 
